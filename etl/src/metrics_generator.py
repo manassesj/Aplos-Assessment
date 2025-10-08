@@ -28,16 +28,32 @@ def compute_metrics():
 
         merged["revenue"] = merged["quantity"] * merged["price"]
 
+        # Metric 1: Revenue by region
         revenue_by_region = merged.groupby("region")["revenue"].sum().reset_index()
+
+        # Metric 2: Top products by category
         top_products = merged.groupby("category")["revenue"].sum().sort_values(ascending=False).reset_index()
 
+        # Metric 3: Revenue by age group
+        bins = [0, 24, 34, 44, 54, 64, 100]
+        labels = ["<25", "25-34", "35-44", "45-54", "55-64", "65+"]
+        merged["age_group"] = pd.cut(merged["age"], bins=bins, labels=labels, right=True)
+        revenue_by_age_group = merged.groupby("age_group")["revenue"].sum().reset_index()
+
+        # Ensure reports directory exists
         os.makedirs(Config.REPORTS_DIR, exist_ok=True)
+
+        # Save metrics to JSON
         revenue_by_region.to_json(
             os.path.join(Config.REPORTS_DIR, "revenue_by_region.json"),
             orient="records", lines=False, indent=4
         )
         top_products.to_json(
             os.path.join(Config.REPORTS_DIR, "top_products.json"),
+            orient="records", lines=False, indent=4
+        )
+        revenue_by_age_group.to_json(
+            os.path.join(Config.REPORTS_DIR, "revenue_by_age_group.json"),
             orient="records", lines=False, indent=4
         )
 

@@ -9,7 +9,8 @@ from src.metrics_generator import compute_metrics, MetricsGenerationError
 def test_compute_metrics_success(mock_logger, mock_makedirs, mock_read_json):
     customers_df = pd.DataFrame({
         "id": [1, 2],
-        "region": ["North", "South"]
+        "region": ["North", "South"],
+        "age": [23, 35]
     })
     products_df = pd.DataFrame({
         "id": [10, 20],
@@ -25,12 +26,12 @@ def test_compute_metrics_success(mock_logger, mock_makedirs, mock_read_json):
 
     mock_read_json.side_effect = [customers_df, products_df, sales_df]
 
-    with patch.object(pd.DataFrame, "to_csv") as mock_to_csv:
+    with patch.object(pd.DataFrame, "to_json") as mock_to_json:
         compute_metrics()
 
         assert mock_read_json.call_count == 3
         assert mock_makedirs.called
-        assert mock_to_csv.call_count == 0
+        assert mock_to_json.call_count == 3  # revenue_by_region, top_products, revenue_by_age_group
         mock_logger.info.assert_any_call("Metrics computed and saved successfully.")
 
 @patch("src.metrics_generator.read_json", side_effect=Exception("JSON read error"))
