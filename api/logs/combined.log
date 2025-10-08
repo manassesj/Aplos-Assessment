@@ -1,1 +1,27 @@
 {"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 00:35:15"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:33:50"}
+{"level":"error","message":"Failed to read file top_products.json: ENOENT: no such file or directory, open 'data/top_products.json'","service":"metrics-api","timestamp":"2025-10-08 07:36:46"}
+{"level":"error","message":"Error: Unable to read top_products.json","service":"metrics-api","timestamp":"2025-10-08 07:36:46"}
+{"level":"error","message":"Failed to read file top_products.json: ENOENT: no such file or directory, open 'data/top_products.json'","service":"metrics-api","timestamp":"2025-10-08 07:37:33"}
+{"level":"error","message":"Error: Unable to read top_products.json","service":"metrics-api","timestamp":"2025-10-08 07:37:33"}
+{"level":"error","message":"Failed to read file top_products.json: ENOENT: no such file or directory, open 'data/top_products.json'","service":"metrics-api","timestamp":"2025-10-08 07:37:34"}
+{"level":"error","message":"Error: Unable to read top_products.json","service":"metrics-api","timestamp":"2025-10-08 07:37:34"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:38:02"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:38:10"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:38:11"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:38:18"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:38:21"}
+{"0":".","1":".","10":"a","11":"/","12":"r","13":"e","14":"p","15":"o","16":"r","17":"t","18":"s","19":"/","2":"/","20":"t","21":"o","22":"p","23":"_","24":"p","25":"r","26":"o","27":"d","28":"u","29":"c","3":"e","30":"t","31":"s","32":".","33":"j","34":"s","35":"o","36":"n","4":"t","5":"l","6":"/","7":"d","8":"a","9":"t","level":"info","message":"Path","service":"metrics-api","timestamp":"2025-10-08 07:38:24"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:38:55"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:38:59"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:38:59"}
+{"0":".","1":".","10":"a","11":"/","12":"r","13":"e","14":"p","15":"o","16":"r","17":"t","18":"s","19":"/","2":"/","20":"t","21":"o","22":"p","23":"_","24":"p","25":"r","26":"o","27":"d","28":"u","29":"c","3":"e","30":"t","31":"s","32":".","33":"j","34":"s","35":"o","36":"n","4":"t","5":"l","6":"/","7":"d","8":"a","9":"t","level":"info","message":"Path","service":"metrics-api","timestamp":"2025-10-08 07:39:04"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:39:19"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:39:26"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:39:38"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:39:51"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:39:53"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:39:57"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:40:02"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 07:40:05"}
+{"level":"info","message":"Server running on port 5000","service":"metrics-api","timestamp":"2025-10-08 08:32:36"}

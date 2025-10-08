@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { salesByAgeGroup, salesByRegion, topProducts } from "../controllers/metricsController.js";
+import {
+  salesByAgeGroup,
+  salesByRegion,
+  topProducts,
+} from "../controllers/metricsController.js";
 
 const router = Router();
 

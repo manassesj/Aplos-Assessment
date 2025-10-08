@@ -19,6 +19,9 @@ async function readJsonFile(fileName: string): Promise<MetricRecord[]> {
   }
 }
 
-export const getTopProducts = async (): Promise<MetricRecord[]> => await readJsonFile("top_products.json");
-export const getSalesByRegion = async (): Promise<MetricRecord[]> => await readJsonFile("revenue_by_region.json");
-export const getSalesByAgeGroup = async (): Promise<MetricRecord[]> => await readJsonFile("revenue_by_age_group.json");
+export const getTopProducts = async (): Promise<MetricRecord[]> =>
+  await readJsonFile("top_products.json");
+export const getSalesByRegion = async (): Promise<MetricRecord[]> =>
+  await readJsonFile("revenue_by_region.json");
+export const getSalesByAgeGroup = async (): Promise<MetricRecord[]> =>
+  await readJsonFile("revenue_by_age_group.json");

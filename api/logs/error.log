@@ -1,0 +1,6 @@
+{"level":"error","message":"Failed to read file top_products.json: ENOENT: no such file or directory, open 'data/top_products.json'","service":"metrics-api","timestamp":"2025-10-08 07:36:46"}
+{"level":"error","message":"Error: Unable to read top_products.json","service":"metrics-api","timestamp":"2025-10-08 07:36:46"}
+{"level":"error","message":"Failed to read file top_products.json: ENOENT: no such file or directory, open 'data/top_products.json'","service":"metrics-api","timestamp":"2025-10-08 07:37:33"}
+{"level":"error","message":"Error: Unable to read top_products.json","service":"metrics-api","timestamp":"2025-10-08 07:37:33"}
+{"level":"error","message":"Failed to read file top_products.json: ENOENT: no such file or directory, open 'data/top_products.json'","service":"metrics-api","timestamp":"2025-10-08 07:37:34"}
+{"level":"error","message":"Error: Unable to read top_products.json","service":"metrics-api","timestamp":"2025-10-08 07:37:34"}
