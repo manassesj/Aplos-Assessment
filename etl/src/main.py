@@ -1,10 +1,9 @@
-# src/main.py
-from .data_generator import main as generate_data
-from .data_cleaner import main as clean_data
-from .metrics_generator import compute_metrics
-from .utils.logger import get_logger
-from .utils.exceptions import DataGenerationError, DataCleaningError, MetricsGenerationError
 import sys
+from src.data_generator import main as generate_data
+from src.data_cleaner import main as clean_data
+from src.metrics_generator import compute_metrics
+from src.utils.logger import get_logger
+from src.utils.exceptions import DataGenerationError, DataCleaningError, MetricsGenerationError
 
 logger = get_logger(__name__)
 
@@ -29,7 +28,7 @@ def run_data_cleaning():
 def run_metrics_computation():
     try:
         logger.info("Starting metrics computation stage...")
-        compute_metrics()
+        compute_metrics()  # now reads JSON cleaned files
         logger.info("Metrics computation stage completed successfully.")
     except MetricsGenerationError as e:
         logger.error(f"Metrics computation failed: {e}")

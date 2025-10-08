@@ -1,4 +1,3 @@
-# src/data_generator.py
 import pandas as pd
 from faker import Faker
 import random
@@ -6,7 +5,7 @@ import os
 from datetime import datetime
 from .config import Config
 from .utils.logger import get_logger
-from src.utils import get_logger, DataGenerationError
+from .utils.exceptions import DataGenerationError
 
 fake = Faker()
 logger = get_logger(__name__)
@@ -41,26 +40,27 @@ def generate_sales(customers, products, n):
             "id": i,
             "customer_id": random.choice(customers["id"].tolist()),
             "product_id": random.choice(products["id"].tolist()),
-            "date": fake.date_between(start_date="-1y", end_date="today"),
+            "date": fake.date_between(start_date="-1y", end_date="today").isoformat(),
             "quantity": random.randint(1, 5)
         })
     return pd.DataFrame(sales)
 
-def save_data(df, path):
+def save_data_as_json(df, path):
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    df.to_csv(path, index=False)
+    df.to_json(path, orient="records", date_format="iso", indent=2)
     logger.info(f"Saved data: {path} ({len(df)} rows)")
 
 def main():
     try:
-        logger.info("Starting data generation...")
+        logger.info("Starting data generation stage...")
         customers = generate_customers(Config.NUM_CUSTOMERS)
         products = generate_products(Config.NUM_PRODUCTS)
         sales = generate_sales(customers, products, Config.NUM_SALES)
 
-        save_data(customers, Config.CUSTOMERS_PATH)
-        save_data(products, Config.PRODUCTS_PATH)
-        save_data(sales, Config.SALES_PATH)
+        save_data_as_json(customers, Config.CUSTOMERS_PATH.replace(".csv", ".json"))
+        save_data_as_json(products, Config.PRODUCTS_PATH.replace(".csv", ".json"))
+        save_data_as_json(sales, Config.SALES_PATH.replace(".csv", ".json"))
+
         logger.info("Data generation completed successfully.")
     except Exception as e:
         logger.exception("Error generating data")

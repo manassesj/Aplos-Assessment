@@ -13,6 +13,9 @@ class Config:
     PROCESSED_DIR = os.path.join(DATA_DIR, "processed")
     REPORTS_DIR = os.path.join(DATA_DIR, "reports")
 
+    for path in [DATA_DIR, LOG_DIR, RAW_DIR, PROCESSED_DIR, REPORTS_DIR]:
+        os.makedirs(path, exist_ok=True)
+
     NUM_CUSTOMERS = int(os.getenv("NUM_CUSTOMERS", 100))
     NUM_PRODUCTS = int(os.getenv("NUM_PRODUCTS", 50))
     NUM_SALES = int(os.getenv("NUM_SALES", 500))
@@ -21,6 +24,10 @@ class Config:
     PRODUCTS_PATH = os.path.join(RAW_DIR, "products.csv")
     SALES_PATH = os.path.join(RAW_DIR, "sales.csv")
 
-    CLEAN_CUSTOMERS_PATH = os.path.join(PROCESSED_DIR, "customers_clean.csv")
-    CLEAN_PRODUCTS_PATH = os.path.join(PROCESSED_DIR, "products_clean.csv")
-    CLEAN_SALES_PATH = os.path.join(PROCESSED_DIR, "sales_clean.csv")
+    CLEAN_CUSTOMERS_PATH_CSV = os.path.join(PROCESSED_DIR, "customers_clean.csv")
+    CLEAN_PRODUCTS_PATH_CSV = os.path.join(PROCESSED_DIR, "products_clean.csv")
+    CLEAN_SALES_PATH_CSV = os.path.join(PROCESSED_DIR, "sales_clean.csv")
+
+    CLEAN_CUSTOMERS_PATH_JSON = os.path.join(PROCESSED_DIR, "customers_clean.json")
+    CLEAN_PRODUCTS_PATH_JSON = os.path.join(PROCESSED_DIR, "products_clean.json")
+    CLEAN_SALES_PATH_JSON = os.path.join(PROCESSED_DIR, "sales_clean.json")

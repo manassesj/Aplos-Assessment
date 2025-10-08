@@ -1,14 +1,12 @@
 import pytest
 import pandas as pd
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from src.metrics_generator import compute_metrics, MetricsGenerationError
-from src.config import Config
 
-@patch("src.metrics_generator.pd.read_csv")
+@patch("src.metrics_generator.read_json")
 @patch("src.metrics_generator.os.makedirs")
-@patch("src.metrics_generator.pd.DataFrame.to_csv")
 @patch("src.metrics_generator.logger")
-def test_compute_metrics_success(mock_logger, mock_to_csv, mock_makedirs, mock_read_csv):
+def test_compute_metrics_success(mock_logger, mock_makedirs, mock_read_json):
     customers_df = pd.DataFrame({
         "id": [1, 2],
         "region": ["North", "South"]
@@ -25,19 +23,20 @@ def test_compute_metrics_success(mock_logger, mock_to_csv, mock_makedirs, mock_r
         "quantity": [2, 3]
     })
 
-    mock_read_csv.side_effect = [customers_df, products_df, sales_df]
+    mock_read_json.side_effect = [customers_df, products_df, sales_df]
 
-    compute_metrics()
+    with patch.object(pd.DataFrame, "to_csv") as mock_to_csv:
+        compute_metrics()
 
-    assert mock_read_csv.call_count == 3
-    assert mock_makedirs.called
-    assert mock_to_csv.call_count == 2
-    mock_logger.info.assert_any_call("Metrics computed and saved successfully.")
+        assert mock_read_json.call_count == 3
+        assert mock_makedirs.called
+        assert mock_to_csv.call_count == 0
+        mock_logger.info.assert_any_call("Metrics computed and saved successfully.")
 
-@patch("src.metrics_generator.pd.read_csv", side_effect=Exception("CSV read error"))
+@patch("src.metrics_generator.read_json", side_effect=Exception("JSON read error"))
 @patch("src.metrics_generator.logger")
-def test_compute_metrics_failure(mock_logger, mock_read_csv):
+def test_compute_metrics_failure(mock_logger, mock_read_json):
     with pytest.raises(MetricsGenerationError) as e:
         compute_metrics()
-    assert "CSV read error" in str(e.value)
+    assert "JSON read error" in str(e.value)
     mock_logger.exception.assert_called()

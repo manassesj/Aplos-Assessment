@@ -1,4 +1,3 @@
-# src/metrics_generator.py
 import pandas as pd
 import os
 from .config import Config
@@ -7,12 +6,22 @@ from .utils.exceptions import MetricsGenerationError
 
 logger = get_logger(__name__)
 
+def read_json(path, df_name):
+    try:
+        df = pd.read_json(path, orient="records", lines=True)  # standard JSON array
+        logger.info(f"{df_name} loaded successfully: {len(df)} rows")
+        return df
+    except Exception as e:
+        logger.exception(f"Error reading JSON {df_name}")
+        raise MetricsGenerationError(f"Failed to read JSON {df_name}: {e}") from e
+
 def compute_metrics():
     try:
         logger.info("Computing business metrics...")
-        customers = pd.read_csv(Config.CLEAN_CUSTOMERS_PATH)
-        products = pd.read_csv(Config.CLEAN_PRODUCTS_PATH)
-        sales = pd.read_csv(Config.CLEAN_SALES_PATH)
+
+        customers = read_json(Config.CLEAN_CUSTOMERS_PATH_JSON, "customers")
+        products = read_json(Config.CLEAN_PRODUCTS_PATH_JSON, "products")
+        sales = read_json(Config.CLEAN_SALES_PATH_JSON, "sales")
 
         merged = sales.merge(customers, left_on="customer_id", right_on="id") \
                       .merge(products, left_on="product_id", right_on="id", suffixes=("_cust", "_prod"))
@@ -23,10 +32,17 @@ def compute_metrics():
         top_products = merged.groupby("category")["revenue"].sum().sort_values(ascending=False).reset_index()
 
         os.makedirs(Config.REPORTS_DIR, exist_ok=True)
-        revenue_by_region.to_csv(os.path.join(Config.REPORTS_DIR, "revenue_by_region.csv"), index=False)
-        top_products.to_csv(os.path.join(Config.REPORTS_DIR, "top_products.csv"), index=False)
+        revenue_by_region.to_json(
+            os.path.join(Config.REPORTS_DIR, "revenue_by_region.json"),
+            orient="records", lines=False, indent=4
+        )
+        top_products.to_json(
+            os.path.join(Config.REPORTS_DIR, "top_products.json"),
+            orient="records", lines=False, indent=4
+        )
 
         logger.info("Metrics computed and saved successfully.")
+
     except Exception as e:
         logger.exception("Error computing metrics.")
         raise MetricsGenerationError(str(e)) from e
