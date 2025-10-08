@@ -8,7 +8,7 @@ logger = get_logger(__name__)
 
 def read_json(path, df_name):
     try:
-        df = pd.read_json(path, orient="records", lines=True)  # standard JSON array
+        df = pd.read_json(path, orient="records", lines=True)  
         logger.info(f"{df_name} loaded successfully: {len(df)} rows")
         return df
     except Exception as e:
@@ -28,13 +28,10 @@ def compute_metrics():
 
         merged["revenue"] = merged["quantity"] * merged["price"]
 
-        # Metric 1: Revenue by region
         revenue_by_region = merged.groupby("region")["revenue"].sum().reset_index()
 
-        # Metric 2: Top products by category
         top_products = merged.groupby("category")["revenue"].sum().sort_values(ascending=False).reset_index()
 
-        # Metric 3: Revenue by age group
         bins = [0, 24, 34, 44, 54, 64, 100]
         labels = ["<25", "25-34", "35-44", "45-54", "55-64", "65+"]
         merged["age_group"] = pd.cut(merged["age"], bins=bins, labels=labels, right=True)
@@ -43,7 +40,6 @@ def compute_metrics():
         # Ensure reports directory exists
         os.makedirs(Config.REPORTS_DIR, exist_ok=True)
 
-        # Save metrics to JSON
         revenue_by_region.to_json(
             os.path.join(Config.REPORTS_DIR, "revenue_by_region.json"),
             orient="records", lines=False, indent=4
