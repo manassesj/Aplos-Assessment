@@ -4,7 +4,7 @@ Description: This ETL pipeline generates synthetic data, processes it, and produ
 
 The pipepine will generate for types of files in diferente folders
 
-![alt text](image.png)
+![alt text](etl_result.png)
 
 Environment Variables: The pipeline uses a .env file with the following variables:
 * DATA_DIR=./data → Directory where input/output data files are stored.
@@ -76,7 +76,7 @@ Testing:
 
 *Frontend React Dashboard*
 
-![alt text](image-1.png)
+![alt text](frontend_result.png)
 
 Description: This is a React 20 frontend dashboard that visualizes metrics data from the API. It shows three charts: top products, sales by region, and sales by age group. The dashboard also provides filters for category, region, and age group, and displays business insights.
 
